@@ -11,6 +11,37 @@ typedef struct No{
   struct No* direita;
 } No;
 
+// Estrutura da Árvore Rubro-Negra
+typedef struct ArvoreRubroNegra {
+// Nó *raiz é o no que sempre aponta para o topo o valor da raiz
+    No *raiz;
+// Nó *NIL ele é um no tambem chamado de sentinela serve principalmente para simplificar o codigo
+// o nó NIL substitui a verificação se o ponteiro é NULL e facilita o balanceamento
+// sempre tera a cor PRETO e todo os nós folhas aponta para ele
+    No *NIL;
+} ArvoreRubroNegra;
+
+// Função para fazer a criação da Arvore Rubro Negra
+ArvoreRubroNegra* criar_arvore() {
+// Realiza a alocação de memoria para o ponteiro T
+    ArvoreRubroNegra* T = (ArvoreRubroNegra*)malloc(sizeof(ArvoreRubroNegra));
+// Realiza a alocação de memoria para o ponteiro T->NIL
+    T->NIL = (No*)malloc(sizeof(No));
+// Inicializa na cor PRETO
+    T->NIL->cor = PRETO;
+// Inicializa com o valor 0
+    T->NIL->chave = 0; 
+// Inicializa com valor NULL
+    T->NIL->esquerda = NULL;
+// Inicializa com valor NULL
+    T->NIL->direita = NULL;
+// Inicializa com valor NULL
+    T->NIL->pai = NULL;
+// Como a raiz ainda não aponta para nada vai apontar para o T->NIL ao inves de NULL
+    T->raiz = T->NIL;
+    return T;
+}
+
 // Função para realizar o rebalanceamento da arvore quando pesa muito para a direita
 void rotacao_esquerda(ArvoreRubroNegra *T, No *x) {
 // y adota o filho x->direita
