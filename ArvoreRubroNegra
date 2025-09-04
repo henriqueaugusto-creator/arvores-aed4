@@ -119,6 +119,37 @@ No* buscar(ArvoreRubroNegra *T, int chave) {
     }
     return atual;
 }
+
+// Função auxiliar para garantir que apos a inserção
+// a Arvore Rubro Negra continuara balanceada
+void inserir_fixup(ArvoreRubroNegra *T, No *z) {
+// Como não pode ter VERMELHO com VERMELHO o while se basea no pai ser VERMELHO
+    while (z->pai->cor == VERMELHO) {
+
+// Esse if faz a seguinte pergunta o pai do meu nó z é o filho esquerdo do meu avó z
+// Verficando se o caso VERMELHO com VERMELHO acontece
+        if (z->pai == z->pai->pai->esquerda) {
+
+// Logicamente se a esquerda é o pai a direita é o tio sendo nele que baseamos a troca de cor
+            No *y = z->pai->pai->direita;
+            
+// Se o tio for vermelho fazemos a troca
+            if (y->cor == VERMELHO) {
+                
+// z->pai->cor e y->cor onde y->cor é o tio mudam para PRETO
+// e o nó avo z->pai->pai->cor vira VERMELHO
+                z->pai->cor = PRETO;
+                y->cor = PRETO;
+                z->pai->pai->cor = VERMELHO;
+// Essa parte é muito importante pois e se o bisavo for VERMELHO
+// por isso z = z->pai->pai pois se o caso for verdadeiro o loop continua
+                z = z->pai->pai;
+            }
+
+// INSERIR AQUI CODIGO QUE FALTA(INTERROMPIDO)------------------------------------------------------------------------------------------------------------
+
+
+
 //FUNÇÃO INSERÇÃO ABAIXO.
 void inserir(ArvoreRubroNegra*T, int chave ){
   No z = (No)malloc(sizeof(No)); //No auxiliar + alocação de memoria + atriubição de valor ao No.
