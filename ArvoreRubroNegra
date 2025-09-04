@@ -182,3 +182,60 @@ z->cor = VERMELHO;
 
 inserir_fixup(T,z);
 }
+
+int main() {
+    int opc = 0, valor;
+    ArvoreRubroNegra *T = criar_arvore();
+    No* resultado;
+
+    do{
+        printf("Escolha uma opcao abaixo.\n(0) Finalizar o programa.\n(1) Inserir um valor.\n(2) Remover um valor.\n");
+        printf("(3) Procurar um valor.\n(4) Imprimir a Arvore Rubro Negra.\n");
+        scanf("%d", &opc);
+        
+        switch(opc){
+            
+            case 0:
+                printf("Programa Encerrado.\n");
+                break;
+                
+            case 1:
+                printf("Digite o valor que deseja inserir.\n");
+                scanf("%d", &valor);
+                inserir(T,valor);
+                printf("Valor: %d inserido com sucesso.\n",valor);
+            break;
+            
+            case 2:
+                printf("Digite o valor que deseja remover.\n");
+                scanf("%d",&valor);
+                remover(T,valor);
+                printf("Valor: %d removido com sucesso.\n", valor);
+            break;
+            
+            case 3:
+                printf("Digite o valor a ser buscado.\n");
+                scanf("%d",&valor);
+                resultado = buscar(T,valor);
+                if (resultado != T->NIL) {
+                    printf("Valor %d encontrada! Cor: %s\n", valor, resultado->cor == VERMELHO ? "Vermelho" : "Preto");
+                }
+                else {
+                    printf("Valor %d não encontrada.\n", valor);
+                }
+            break;
+            
+            case 4:
+                em_ordem(T, T->raiz);
+                printf("\n");
+            break;
+            
+            default:
+                printf("Opcao não conhecida.\nTente Novamente.\n");
+                break;
+        }
+        
+    }while(opc != 0);
+    
+    return 0;
+}
