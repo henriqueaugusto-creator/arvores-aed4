@@ -68,3 +68,23 @@ void rotacao_direita(ArvoreRubroNegra *T, No *y) {
     x->direita = y;
     y->pai = x;
 }
+
+
+
+
+// Função para buscar um valor na Arvore    Rubro   Negra
+No* buscar(ArvoreRubroNegra *T, int chave) {
+    No *atual = T->raiz;
+// A função realiza a busca pelo valor desejado
+// Se o valor for menor que a raiz ele vai para a esquerda
+// Se for maior vai para a direita e retorna o ponteiro diferente de T->NIL
+// Caso não encontre irá retorna T->NIL
+    while (atual != T->NIL && chave != atual->chave) {
+        if (chave < atual->chave) {
+            atual = atual->esquerda;
+        } else {
+            atual = atual->direita;
+        }
+    }
+    return atual;
+}
