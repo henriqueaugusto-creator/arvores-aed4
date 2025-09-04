@@ -10,3 +10,61 @@ typedef struct No{
   struct No *esquerda;
   struct No* direita;
 } No;
+
+// Função para realizar o rebalanceamento da arvore quando pesa muito para a direita
+void rotacao_esquerda(ArvoreRubroNegra *T, No *x) {
+// y adota o filho x->direita
+    No *y = x->direita;
+// x->direita adota o filho y->esquerda 
+    x->direita = y->esquerda;
+
+    if (y->esquerda != T->NIL) {
+// Garante que o no y->esquerda que foi adotado por x vai entender que x agora é seu pai
+// por isso y->esquerda->pai = x está dizendo que x agora é pai de y->esquerda
+        y->esquerda->pai = x;
+    }
+    
+// A ligação que o pai de x tinha com x agora é refeita para y ou seja
+// se x era a raiz da arvore agora y é a raiz
+    y->pai = x->pai;
+    if (x->pai == T->NIL) {
+        T->raiz = y;
+    } else if (x == x->pai->esquerda) {
+        x->pai->esquerda = y;
+    } else {
+        x->pai->direita = y;
+    }
+    
+// Agora x se torna o filho esquerdo de y
+    y->esquerda = x;
+    x->pai = y;
+}
+
+// Função para realizar o rebalanceamento da arvore quando pesa muito para a esquerda
+void rotacao_direita(ArvoreRubroNegra *T, No *y) {
+// x adota o filho y->esquerda
+    No *x = y->esquerda;
+// y->esquerda adota o filho x->direita
+    y->esquerda = x->direita;
+
+    if (x->direita != T->NIL) {
+// Garante que o no x->direita que foi adotado por y vai entender que y agora é seu pai
+// por isso x->direta->pai = y está dizendo que y agora é pai de x->direita
+        x->direita->pai = y;
+    }
+
+// A ligação que o pai de y tinha com y agora é refeita para x ou seja
+// se y era a raiz da arvore agora x é a raiz
+    x->pai = y->pai;
+    if (y->pai == T->NIL) {
+        T->raiz = x;
+    } else if (y == y->pai->direita) {
+        y->pai->direita = x;
+    } else {
+        y->pai->esquerda = x;
+    }
+    
+// Agora y se torna o filho direito de x
+    x->direita = y;
+    y->pai = x;
+}
