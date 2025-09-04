@@ -100,9 +100,6 @@ void rotacao_direita(ArvoreRubroNegra *T, No *y) {
     y->pai = x;
 }
 
-
-
-
 // Função para buscar um valor na Arvore    Rubro   Negra
 No* buscar(ArvoreRubroNegra *T, int chave) {
     No *atual = T->raiz;
