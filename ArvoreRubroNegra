@@ -1,0 +1,12 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef enum { VERMELHO, PRETO} Cor;
+
+typedef struct No{
+  int chave;
+  Cor cor;
+  struct No *pai;
+  struct No *esquerda;
+  struct No* direita;
+} No;
