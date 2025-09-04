@@ -88,3 +88,38 @@ No* buscar(ArvoreRubroNegra *T, int chave) {
     }
     return atual;
 }
+//FUNÇÃO INSERÇÃO ABAIXO.
+void inserir(ArvoreRubroNegra*T, int chave ){
+  No z = (No)malloc(sizeof(No)); //No auxiliar + alocação de memoria + atriubição de valor ao No.
+  z->chave = chave;
+
+  //DOIS PONTEIROS DE BUSCA.
+  No *y = T->NIL;
+  No *x = T->raiz;
+
+  //LOOP PARA ENCONTRAR FOLHA VAZIA
+  while (x!= T->NIL){
+    y = x; //o Y serve para o último lugar o último do  nó caso o X seja NIL.
+
+//IF utilizado para mover o NO caso o valor for menor para esquerda ou maior para a direita.
+    if(z->chave<x->chave){
+      x = x->esquerda;
+    }else{
+      x = x->direita;
+    }
+  }
+z-> pai = y;
+if (y == T->NIL){
+  T->raiz = z;
+}// Usado caso o y esteja vazio a árvore também estará vazia, então o valor de y se tornará a raiz da árvore.
+else if (z->chave < y->chave){
+  y->esquerda = z;
+}else {
+  y->direita = z;
+}
+z->esquerda = T->NIL;
+z->direita = T->NIL;
+z->cor = VERMELHO;
+
+inserir_fixup(T,z);
+}
